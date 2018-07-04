@@ -44,7 +44,7 @@
         
         function $(id){return document.getElementById(id)}
         
-        const VERSION = "0.6.0";
+        const VERSION = "0.6.1";
         const TEMPLATE = $('template').innerHTML;
         const MARKERS = [
           //PASTE DATA
@@ -146,12 +146,17 @@
         }
 
         function getHtml(){
+          var i;
           var result = TEMPLATE;
           var data = DATA.concat(LIST[CURRENT]);
                     
           for(i=0; i<data.length; i++){
             result = result.split(MARKERS[i]).join(data[i]);
           }
+          
+          //other settings
+          i = result.lastIndexOf(LIST[CURRENT][0]);
+          result = result.substring(0,i) + LIST[CURRENT][0].substring(0, LIST[CURRENT][0].indexOf('.')) + result.substring(i+LIST[CURRENT][0].length);
           
           return result;
         }
@@ -242,16 +247,16 @@
               <img createnew='true'  style='border: none; max-width: 100%; height: auto;' src='@MARKER_LOGO_IMAGE' alt='@MARKER_SITE'/>
             </a>
           </td>
-          <td align='right' colspan='2' style='padding-left: 16px'>
-            <a href='tel:@MARKER_PHONE' style='outline: none; text-decoration: none; color:@MARKER_TEXT_COLOR; font-size: 16px; font-family: "Open Sans",sans-serif; font-weight: 60; margin-bottom: 2px; margin-top:0;'>Tel:+@MARKER_PHONE<br>SUPPORT 24/7</a>
+          <td align='right' colspan='2' style='padding-left: 10px'>
+            <a href='tel:@MARKER_PHONE' style='outline: none; text-decoration: none; color:@MARKER_TEXT_COLOR; font-size: 14px; font-family: "Open Sans",sans-serif; font-weight: 60; margin-bottom: 2px; margin-top: 2px;'>Tel:+@MARKER_PHONE<br>SUPPORT 24/7</a>
           </td>
         </tr>
         
         <!-- BANNER -->
         <tr>
-          <td colspan='4' style='padding:0!important;' bgcolor='#ffffff'> 
-            <div>
-              <a target='_blank' style='outline: none;' href='https://www.@MARKER_SITE/order/?l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign=@MARKER_UTM_CAMPAIGN'>
+          <td colspan='4' style='padding:0!important;' bgcolor='#ffffff' style='border: none'> 
+            <div style='border: none'>
+              <a target='_blank' style='border: none; outline: none;' href='https://www.@MARKER_SITE/order/?l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign=@MARKER_UTM_CAMPAIGN'>
                 <img  src='@MARKER_BANNER_IMAGE' alt='@MARKER_ALT_TEXT' style='border: none; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; display: inline; margin: 0 auto; width:100%; max-width: 600px;'/>
               </a>
             </div>
@@ -289,7 +294,7 @@
             </p>
             
             <p style='color: #3b3b3b; font-family: "Open Sans",sans-serif; font-size:16px; text-align:left;'> 
-              <b>Best Regards,<br>Alice Fisher</b>
+              Best Regards,<br>Alice Fisher
             </p>
           </td>
         </tr>
@@ -325,7 +330,7 @@
     <![endif]-->
     
   </body>
-</html>                                                  
+</html>                                                                                                   
       
     </iframe>   
     <!-------------->
