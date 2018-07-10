@@ -1,0 +1,41 @@
+OLD:
+
+          '@MARKER_PREHEADER',           // 0
+          '@MARKER_ALT_TEXT',            // 1
+          '@MARKER_BANNER_IMAGE',        // 2
+          '@MARKER_PROMO_CODE',          // 3
+          '@MARKER_UTM_CAMPAIGN',        // 4
+          '@MARKER_TEXT_PREBTN',         // 5
+          '@MARKER_TEXT_POSTBTN',        // 6
+
+          '@MARKER_SITE',                // 7
+          '@MARKER_LOGO_IMAGE',          // 8
+          '@MARKER_LOGO_COLOR',          // 9
+          '@MARKER_LINK_ANCHOR',         // 10
+          '@MARKER_PHONE',               // 11
+          '@MARKER_FOOTER_COLOR',        // 12
+          '@MARKER_BUTTON_COLOR',        // 13
+          '@MARKER_TEXT_COLOR'           // 14
+
+NEW:
+
+          '@MARKER_PRE@',            // 0
+          '@MARKER_ALT@',            // 1
+          '@MARKER_BANNER@',         // 2
+          '@MARKER_PROMO@',          // 3
+          '@MARKER_UTM@',            // 4
+          '@MARKER_PREBTN@',         // 5
+          '@MARKER_POSTBTN@',        // 6
+
+          '@MARKER_SITE@',            // 7
+          '@MARKER_LOGO@',            // 8
+	        '@MARKER_PHONE@',           // 11
+          '@MARKER_LINK@',            // 10
+          
+          '@MARKER_BUTTON_COLOR@',    // 13      
+          '@MARKER_LOGO_COLOR@',      // 9
+          '@MARKER_LOGO_TEXT@'	      // NEW
+          '@MARKER_FOOTER_COLOR@',    // 12
+          '@MARKER_FOOTER_TEXT@'      // 14
+
+
