@@ -1,0 +1,45 @@
+     *{
+        font-family: Consolas;
+        border: none;
+	//border: 1px dashed;
+        border-radius: 8px;
+        outline: none;
+      }
+      .container{
+        float: left;
+        width: 48%;
+        height: 98%;
+        margin: 1%;
+      }
+      body{
+        background-color: #668877;
+        background-image: url('back.jpg');
+      }
+      
+      textarea{
+        margin: 1%;
+        resize: none;
+        width: 100%;
+        display: inline-block;
+        vertical-align: top; 
+        outline: none;
+        
+        background-color: rgba(235,255,245,0.7);
+        font-weight: 600;
+      }
+      textarea:hover, textarea:focus{
+        background-color: #ffffff;
+      }
+      button{
+        width: 31%;
+        margin: 1%; 
+        height: 32px;
+        float: left;
+        background-color: #88aacc;
+        white-space: nowrap; 
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      button:active{
+        background-color: #ff99cc;
+      }
