@@ -105,10 +105,10 @@
 
         function getPlain(){
           var result = "";
-          result += DATA[5].split('<br>').join('\n');
+          result += DATA[5].split('\n').join('').split('<br>').join('\n');
           result += "\n\nGet 16% OFF any order over 5 pages\n\n";
           result += 'https://www.'+LIST[CURRENT][0]+'/order/?numpages=5&promo='+DATA[3]+'&l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign='+DATA[4]+LIST[CURRENT][3];
-          result += '\n\n' + DATA[6].split('<br>').join('\n');
+          result += '\n\n' + DATA[6].split('\n').join('').split('<br>').join('\n');
           return result;
         }
 
