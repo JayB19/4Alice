@@ -9,7 +9,7 @@
         
         function $(id){return document.getElementById(id)}
         
-        const VERSION = "0.6.83";
+        const VERSION = "0.6.8";
         const TEMPLATE = $('template').innerHTML;
         const MARKERS = [
           //PASTE DATA
@@ -105,7 +105,7 @@
 
         function getPlain(){
           var result = "";
-          result += DATA[5].split('<br><br>').join('\n');
+          result += DATA[5].split('<br>').join('\n');
           result += "\n\nGet 16% OFF any order over 5 pages\n\n";
           result += 'https://www.'+LIST[CURRENT][0]+'/order/?numpages=5&promo='+DATA[3]+'&l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign='+DATA[4]+LIST[CURRENT][3];
           result += '\n\n' + DATA[6].split('<br>').join('\n');
