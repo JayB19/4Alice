@@ -1,55 +1,15 @@
 <html>
   <head>
-    <title>4Alice</title>
+    <title>4Alice generator</title>
     <meta charset='utf-8'>
-    <style>
-      *{
-        font-family: Consolas;
-        border: none;
-        border-radius: 8px;
-        outline: none;
-      }
-      .container{
-        float: left;
-        width: 48%;
-        height: 98%;
-        margin: 1%;
-      }
-      textarea{
-        margin: 1%;
-        resize: none;
-        width: 100%;
-        display: inline-block;
-        vertical-align: top; 
-        outline: none;
-        
-        background-color: rgba(235,255,245,0.7);
-        font-weight: 600;
-      }
-      textarea:hover{
-        background-color: #ffffff;
-      }
-      button{
-        width: 31%;
-        margin: 1%; 
-        height: 32px;
-        float: left;
-        background-color: #88aacc;
-        white-space: nowrap; 
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
-      button:active{
-        background-color: #ff99cc;
-      }
-      
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
     <script>
       window.onload = function(){
         
         function $(id){return document.getElementById(id)}
         
-        const VERSION = "0.6.7";
+        const VERSION = "0.6.8";
         const TEMPLATE = $('template').innerHTML;
         const MARKERS = [
           //PASTE DATA
@@ -162,8 +122,14 @@
           }
           
           //other settings
+          function drop(str, list){
+            for(var i=0; i<list.length; i++){
+              str = str.split(list[i]).join('');
+            }
+            return str.charAt(0).toUpperCase() + str.slice(1);
+          }
           i = result.lastIndexOf(LIST[CURRENT][0]);
-          result = result.substring(0,i) + LIST[CURRENT][0].substring(0, LIST[CURRENT][0].indexOf('.')) + result.substring(i+LIST[CURRENT][0].length);
+          result = result.substring(0,i) + drop(LIST[CURRENT][0], ['.com','.co','.uk','.au','.org']) + result.substring(i+LIST[CURRENT][0].length);
           
           return result;
         }
@@ -171,7 +137,7 @@
       }
     </script>
   </head>
-  <body bgcolor='#668877' background='back.jpg'>
+  <body>
     <div class='container'>
       <button id='b_about'>About</button>
       <button id='b_apply'>Apply</button>  
@@ -197,8 +163,7 @@
     <!-------------->    
     <iframe id='template' style='display:none'>
 
-    
- <!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
 <html xmlns='http://www.w3.org/1999/xhtml'>
   <head>
     <title></title>
@@ -216,9 +181,10 @@
         }
       }
       
-      @media all and (max-width: 360px) {
+      @media all and (max-width: 400px) {
         .minifont{
-          font-size: 12px;
+          font-size: 11px;
+          font-weight: 120;
         }
       }
       
@@ -250,14 +216,14 @@
       <tbody>
         
         <!-- LOGO -->
-        <tr  bgcolor='@MARKER_LOGO_COLOR@' style='border-radius: 6px'>
-          <td width='180px' colspan='2' style='padding:10px 0px 10px 10px;'>
+        <tr  bgcolor='@MARKER_LOGO_COLOR@'>
+          <td width='180px' colspan='2' style='padding:10px 0px 10px 5px;'>
             <a target='_blank' style='outline: none' href='https://www.@MARKER_SITE@/?l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign=@MARKER_UTM@'>
               <img createnew='true'  style='border: none; max-width: 100%; height: auto;' src='@MARKER_LOGO@' alt='@MARKER_SITE@'/>
             </a>
           </td>
-          <td align='right' colspan='2' style='padding: 0px 10px 0px 10px;'>
-            <a class='minifont' href='tel:@MARKER_PHONE@' style='white-space: nowrap; outline: none; text-decoration: none; color:@MARKER_LOGO_TEXT@; font-family: "Open Sans",sans-serif; font-weight: 60; margin-bottom: 2px; margin-top: 2px;'>Tel:+@MARKER_PHONE@<br>SUPPORT 24/7</a>
+          <td align='right' colspan='2' style='padding: 0px 5px 0px 0px;'>
+            <a class='minifont' href='tel:@MARKER_PHONE@' style='white-space: nowrap; outline: none; text-decoration: none; color:@MARKER_LOGO_TEXT@; font-family: "Open Sans",sans-serif; font-weight: 60; -webkit-text-size-adjust:none;'>Tel:+@MARKER_PHONE@<br>SUPPORT 24/7</a>
           </td>
         </tr>
         
@@ -314,11 +280,11 @@
             <table width='100%' border='0' style='border-collapse: collapse; table-layout: fixed; font-family: "Open Sans",sans-serif; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;'>
               <tr bgcolor='@MARKER_FOOTER_COLOR@'>
                 <td align='left' style='padding: 0px 20px 0px 20px;' width='45%'>
-                  <p class='minifont' style='font-family: "Open Sans",sans-serif; font-weight: 600; color: @MARKER_FOOTER_TEXT@;'>We accept:</p>
+                  <p class='minifont' style='font-family: "Open Sans",sans-serif; font-weight: 600; color: @MARKER_FOOTER_TEXT@; -webkit-text-size-adjust:none'>We accept:</p>
                   <img createnew='true'  src='https://multimedia.getresponse.com/getresponse-10719303/photos/381942603.png' alt='Payment Methods' style='max-width: 100%; height: auto;'/>
                 </td>
                 <td align='right' style='padding: 0px 20px 0px 20px;' width='45%'>
-                  <p class='minifont' style='font-family: "Open Sans",sans-serif; font-weight: 598; color: @MARKER_FOOTER_TEXT@;'>All payments are processed by:</p>
+                  <p class='minifont' style='font-family: "Open Sans",sans-serif; font-weight: 598; color: @MARKER_FOOTER_TEXT@; -webkit-text-size-adjust:none'>All payments are processed by:</p>
                   <img createnew='true'  src='https://multimedia.getresponse.com/getresponse-10719303/photos/381942703.png' alt='Secure Payment' style='max-width: 100%; height: auto;'/>
                 </td>
               </tr>
@@ -346,7 +312,9 @@
     <![endif]-->
     
   </body>
-</html>                                                  
+</html>                                                                                                                                      
+
+
     </iframe>   
     <!-------------->
     <!-- TEMPLATE -->
