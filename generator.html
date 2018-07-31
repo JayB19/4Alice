@@ -9,17 +9,18 @@
         
         function $(id){return document.getElementById(id)}
         
-        const VERSION = "0.6.8";
+        const VERSION = "0.6.9";
         const TEMPLATE = $('template').innerHTML;
         const MARKERS = [
           //PASTE DATA
           '@MARKER_PRE@',           // 0
           '@MARKER_ALT@',           // 1
-          '@MARKER_BANNER@',        // 2
-          '@MARKER_PROMO@',         // 3
-          '@MARKER_UTM@',           // 4
-          '@MARKER_PREBTN@',        // 5
-          '@MARKER_POSTBTN@',       // 6
+          '@MARKER_PROMO@',         // 2
+          '@MARKER_UTM@',           // 3
+          '@MARKER_PREBTN@',        // 4
+          '@MARKER_POSTBTN@',       // 5
+          //BANNER IMAGE
+          '@MARKER_BANNER@',        // 6
           //SITELIST DATA
           '@MARKER_SITE@',          // 7
           '@MARKER_LOGO@',          // 8
@@ -31,17 +32,22 @@
           '@MARKER_BUTTON_COLOR@',  // 13  
           '@MARKER_LOGO_TEXT@',     // 14
           '@MARKER_FOOTER_TEXT@',   // 15
+          
         ];
         var CURRENT = -1;
+        var BANNER = 0;
         var SWITCH = true;
         var LIST;
         var DATA;
+        var BANNERS;
 
         
 
         $('b_apply').onclick = function(){
           LIST = parseSiteList();
           DATA = parseData();
+          BANNERS = parseBanners();
+
           addButtons();
         }
         $('b_about').onclick = function(){
@@ -60,25 +66,45 @@
           }
           return result;
         }
+        
+        function parseBanners(){
+          // returns array of banner image links
+          var result = $('imgs').value.split('\n');
+          return result;
+        }
 
         function parseData(){
           // returns array of parse-data
           var result = [];
           result[0] = $('d_pre').value;
           result[1] = $('d_alt').value;
-          result[2] = $('d_img').value;
-          result[3] = $('d_pro').value;
-          result[4] = $('d_utm').value;
-          result[5] = $('d_txt1').value;
-          result[6] = $('d_txt2').value;
+          result[2] = $('d_pro').value;
+          result[3] = $('d_utm').value;
+          result[4] = $('d_txt1').value;
+          result[5] = $('d_txt2').value;
           
           return result;
         }
 
         function addButtons(){
           var container = $('buttons');
-          container.innerHTML = "Sites: <br>";
+          container.innerHTML = "";
+          
           var button;
+          //create banner buttons
+          for(var i=0; i<BANNERS.length; i++){
+            button = document.createElement('button');
+            button.name = i;
+            button.onclick = clickImg;
+            var img = document.createElement('img');
+            img.src = BANNERS[i];
+            img.style = 'width:100%; height:100%; border-radius: 0px;';
+            button.appendChild(img);
+            container.appendChild(button);
+          }
+          
+          
+          //create site buttons
           for(var i=0; i<LIST.length; i++){
             button = document.createElement('button');
             button.innerHTML = LIST[i][0];
@@ -102,23 +128,30 @@
             field.value = getPlain();
           }
         }
+        
+        function clickImg(){
+          BANNER = this.name;
+        }
 
         function getPlain(){
           var result = "";
-          result += DATA[5].split('\n').join('').split('<br>').join('\n');
+          result += DATA[4].split('\n').join('').split('<br>').join('\n');
           result += "\n\nGet 16% OFF any order over 5 pages\n\n";
-          result += 'https://www.'+LIST[CURRENT][0]+'/order/?numpages=5&promo='+DATA[3]+'&l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign='+DATA[4]+LIST[CURRENT][3];
-          result += '\n\n' + DATA[6].split('\n').join('').split('<br>').join('\n');
+          result += 'https://www.'+LIST[CURRENT][0]+'/order/?numpages=5&promo='+DATA[2]+'&l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign='+DATA[3]+LIST[CURRENT][2];
+          result += '\n\n' + DATA[5].split('\n').join('').split('<br>').join('\n');
           return result;
         }
 
         function getHtml(){
           var i;
           var result = TEMPLATE;
-          var data = DATA.concat(LIST[CURRENT]);
-                    
+          var data = DATA.concat(BANNERS[BANNER]).concat(LIST[CURRENT]);
+
+          console.log(data);
+          
           for(i=0; i<data.length; i++){
             result = result.split(MARKERS[i]).join(data[i]);
+            console.log(MARKERS[i], data[i]);
           }
           
           //other settings
@@ -141,11 +174,11 @@
     <div class='container'>
       <button id='b_about'>About</button>
       <button id='b_apply'>Apply</button>  
-      <textarea id='list' rows='8' placeholder='Paste site list here...'></textarea>
-
+      <textarea id='list' rows='6' placeholder='Paste site list here...'></textarea>
+      <textarea id='imgs' rows='4' placeholder='Banners'></textarea>
+      
       <textarea id='d_pre' rows='2' placeholder='Preheader'></textarea>
       <textarea id='d_alt' rows='2' placeholder='Alt text'></textarea>
-      <textarea id='d_img' rows='2' placeholder='Banner link'></textarea>
       <textarea id='d_pro' rows='2' placeholder='Promo code'></textarea>
       <textarea id='d_utm' rows='2' placeholder='Campaign'></textarea>
       <textarea id='d_txt1' rows='6' placeholder='Pre text'></textarea>
@@ -200,18 +233,7 @@
       <tr>
       <td valign='top' width='600' style='padding-left: 0px; padding-right: 0px;'>
     <![endif]-->
-    
-    <table cellpadding='8' cellspacing='0' lang='x-outer'  border='0' style='border-collapse: collapse; table-layout: fixed; font-family: "Open Sans",sans-serif; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto;' align='center'>
-      <tbody>
-        <tr>
-          <td colspan='4'>
-            <div><font style='font-size: 12px;color: #1c2837;'>Please add this address to your Contact List to continue receiving emails in your inbox.</font></div>
-            <div><font style='font-size: 12px;'>No images in this email? <a href='[[view]]' target='_blank' style=''>View the online version</a></font></div>
-          </td>
-        </tr>
-      </tbody>
-    </table> 
-    
+  
     <table cellpadding='0' cellspacing='0' lang='x-outer'  border='0' style='border-collapse: collapse; table-layout: fixed; font-family: "Open Sans",sans-serif; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; -webkit-box-shadow: 0 3px 9px #313d4c; box-shadow: 0 3px 9px #313d4c;' align='center'>
       <tbody>
         
@@ -312,8 +334,7 @@
     <![endif]-->
     
   </body>
-</html>                                                                                                                                      
-
+</html>                                                  
 
     </iframe>   
     <!-------------->
