@@ -135,10 +135,13 @@
 
         function getPlain(){
           var result = "";
-          result += DATA[4].split('\n').join('').split('<br>').join('\n');
+          result += "Hello [[name]]!\n\n"+DATA[4].split('\n').join('').split('<br>').join('\n');
           result += "\n\nGet 16% OFF any order over 5 pages\n\n";
           result += 'https://www.'+LIST[CURRENT][0]+'/order/?numpages=5&promo='+DATA[2]+'&l=[[autohash]]&utm_source=manual&utm_medium=email&utm_campaign='+DATA[3]+LIST[CURRENT][2];
           result += '\n\n' + DATA[5].split('\n').join('').split('<br>').join('\n');
+          result += "\n\nBest Regards,\nAlice Fisher\n\n";
+          result += "You are receiving this email because you are a registered user of "+drop(LIST[CURRENT][0], ['.com','.co','.uk','.au','.org'])+"."
+          
           return result;
         }
 
@@ -155,17 +158,19 @@
           }
           
           //other settings
-          function drop(str, list){
-            for(var i=0; i<list.length; i++){
-              str = str.split(list[i]).join('');
-            }
-            return str.charAt(0).toUpperCase() + str.slice(1);
-          }
+          
           i = result.lastIndexOf(LIST[CURRENT][0]);
           result = result.substring(0,i) + drop(LIST[CURRENT][0], ['.com','.co','.uk','.au','.org']) + result.substring(i+LIST[CURRENT][0].length);
           
           return result;
         }
+        
+        function drop(str, list){
+            for(var i=0; i<list.length; i++){
+              str = str.split(list[i]).join('');
+            }
+            return str.charAt(0).toUpperCase() + str.slice(1);
+          }
       
       }
     </script>
